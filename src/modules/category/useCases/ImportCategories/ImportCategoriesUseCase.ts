@@ -30,8 +30,6 @@ export class ImportCategoriesUseCase {
         });
       }
     });
-
-    await fs.promises.unlink(file.path);
   }
 
   public async loadCategories(
@@ -54,7 +52,8 @@ export class ImportCategoriesUseCase {
             description,
           });
         })
-        .on('end', () => {
+        .on('end', async () => {
+          await fs.promises.unlink(file.path);
           resolve(categories);
         })
         .on('error', err => {
