@@ -1,4 +1,4 @@
-import { Category } from '@modules/category';
+import { Category } from '@prisma/client';
 
 import { ICreateCategoryDTO } from './CategoriesDTO';
 
@@ -7,5 +7,5 @@ export interface ICategoriesRepository {
   findAll(): Promise<Category[]>;
   findById(id: string): Promise<Category | undefined>;
   findByName(name: string): Promise<Category | undefined>;
-  remove(id: string): Promise<void>;
+  delete(id: string): Promise<void>;
 }

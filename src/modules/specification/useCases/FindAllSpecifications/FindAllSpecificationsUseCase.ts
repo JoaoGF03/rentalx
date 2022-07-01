@@ -1,6 +1,6 @@
+import { Specification } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
 
-import { Specification } from '@modules/specification';
 import { ISpecificationsRepository } from '@modules/specification/repositories/ISpecificationsRepository';
 
 @injectable()

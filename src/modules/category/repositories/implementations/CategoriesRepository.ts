@@ -48,7 +48,7 @@ export class CategoriesRepository implements ICategoriesRepository {
     return category;
   }
 
-  public async remove(id: string): Promise<void> {
+  public async delete(id: string): Promise<void> {
     await this.ormRepository.delete({
       where: {
         id,

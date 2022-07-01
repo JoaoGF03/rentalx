@@ -18,6 +18,6 @@ export class DeleteCategoryUseCase {
       throw new AppError('Category not found', 404);
     }
 
-    this.categoriesRepository.remove(id);
+    this.categoriesRepository.delete(id);
   }
 }

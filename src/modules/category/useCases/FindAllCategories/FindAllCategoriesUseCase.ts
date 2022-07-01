@@ -1,6 +1,6 @@
+import { Category } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
 
-import { Category } from '@modules/category';
 import { ICategoriesRepository } from '@modules/category/repositories/ICategoriesRepository';
 
 @injectable()

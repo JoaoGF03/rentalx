@@ -1,4 +1,5 @@
-import { Specification } from '@modules/specification';
+import { Specification } from '@prisma/client';
+import { v4 as uuidV4 } from 'uuid';
 
 import { ISpecificationsRepository } from '../ISpecificationsRepository';
 import { ICreateSpecificationDTO } from '../SpecificationsDTO';
@@ -10,7 +11,13 @@ export class SpecificationsRepository implements ISpecificationsRepository {
     name,
     description,
   }: ICreateSpecificationDTO): Promise<Specification> {
-    const specification = new Specification({ name, description });
+    const specification = {
+      id: uuidV4(),
+      name,
+      description,
+      createdAt: new Date(Date.now()),
+      updatedAt: new Date(Date.now()),
+    };
 
     this.specifications.push(specification);
 
@@ -37,7 +44,7 @@ export class SpecificationsRepository implements ISpecificationsRepository {
     return specification;
   }
 
-  public async remove(id: string): Promise<void> {
+  public async delete(id: string): Promise<void> {
     const specificationIndex = this.specifications.findIndex(
       specification => specification.id === id,
     );

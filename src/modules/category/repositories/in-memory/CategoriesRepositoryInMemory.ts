@@ -1,4 +1,5 @@
-import { Category } from '@modules/category';
+import { Category } from '@prisma/client';
+import { v4 as uuidV4 } from 'uuid';
 
 import { ICreateCategoryDTO } from '../CategoriesDTO';
 import { ICategoriesRepository } from '../ICategoriesRepository';
@@ -10,7 +11,13 @@ export class CategoriesRepository implements ICategoriesRepository {
     name,
     description,
   }: ICreateCategoryDTO): Promise<Category> {
-    const category = new Category({ name, description });
+    const category = {
+      id: uuidV4(),
+      name,
+      description,
+      createdAt: new Date(Date.now()),
+      updatedAt: new Date(Date.now()),
+    };
 
     this.categories.push(category);
 
@@ -29,7 +36,7 @@ export class CategoriesRepository implements ICategoriesRepository {
     return this.categories.find(category => category.id === id);
   }
 
-  public async remove(id: string): Promise<void> {
+  public async delete(id: string): Promise<void> {
     this.categories = this.categories.filter(category => category.id !== id);
   }
 }

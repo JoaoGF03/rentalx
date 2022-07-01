@@ -48,7 +48,7 @@ export class SpecificationsRepository implements ISpecificationsRepository {
     return specification;
   }
 
-  public async remove(id: string): Promise<void> {
+  public async delete(id: string): Promise<void> {
     await this.ormRepository.delete({
       where: {
         id,

@@ -1,8 +1,8 @@
+import { Specification } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
 
 import { AppError } from '@shared/errors/AppError';
 
-import { Specification } from '@modules/specification';
 import { ISpecificationsRepository } from '@modules/specification/repositories/ISpecificationsRepository';
 import { ICreateSpecificationDTO } from '@modules/specification/repositories/SpecificationsDTO';
 

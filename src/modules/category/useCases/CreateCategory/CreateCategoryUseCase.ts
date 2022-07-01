@@ -1,8 +1,8 @@
+import { Category } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
 
 import { AppError } from '@shared/errors/AppError';
 
-import { Category } from '@modules/category';
 import { ICreateCategoryDTO } from '@modules/category/repositories/CategoriesDTO';
 import { ICategoriesRepository } from '@modules/category/repositories/ICategoriesRepository';
 
