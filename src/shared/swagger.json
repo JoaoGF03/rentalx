@@ -247,19 +247,16 @@
               }
             }
           },
-          "400": {
+          "400":{
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "examples": {
-                  "Email in use": {
-                    "value": {
-                      "message": "User already exists with this email"
-                    }
-                  },
-                  "Username in use": {
-                    "value": {
-                      "message": "User already exists with this username"
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User already exists"
                     }
                   }
                 }
@@ -360,10 +357,6 @@
             "type": "string",
             "example": "User"
           },
-          "username": {
-            "type": "string",
-            "example": "username"
-          },
           "email": {
             "type": "string",
             "example": "email@email.com"
@@ -426,10 +419,6 @@
           "name": {
             "type": "string",
             "example": "User"
-          },
-          "username": {
-            "type": "string",
-            "example": "username"
           },
           "email": {
             "type": "string",

@@ -13,7 +13,6 @@ export class UsersRepository implements IUsersRepository {
     email,
     name,
     password,
-    username,
   }: ICreateUserDTO): Promise<User> {
     const user = await this.ormRepository.create({
       data: {
@@ -21,17 +20,6 @@ export class UsersRepository implements IUsersRepository {
         email,
         name,
         password,
-        username,
-      },
-    });
-
-    return user;
-  }
-
-  public async findByUsername(username: string): Promise<User> {
-    const user = await this.ormRepository.findUnique({
-      where: {
-        username,
       },
     });
 
