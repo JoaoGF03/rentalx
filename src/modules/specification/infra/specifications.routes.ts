@@ -3,11 +3,11 @@ import { Router } from 'express';
 import { CreateSpecificationController } from '../useCases/CreateSpecification/CreateSpecificationController';
 import { FindAllSpecificationsController } from '../useCases/FindAllSpecifications/FindAllSpecificationsController';
 
-export const specificationsRoutes = Router();
+export const specificationsRouter = Router();
 
 const createSpecificationController = new CreateSpecificationController();
 const findAllSpecificationsController = new FindAllSpecificationsController();
 
-specificationsRoutes.post('/', createSpecificationController.handle);
+specificationsRouter.post('/', createSpecificationController.handle);
 
-specificationsRoutes.get('/', findAllSpecificationsController.handle);
+specificationsRouter.get('/', findAllSpecificationsController.handle);

@@ -7,7 +7,7 @@ import { DeleteCategoryController } from '../useCases/DeleteCategory/DeleteCateg
 import { FindAllCategoriesController } from '../useCases/FindAllCategories/FindAllCategoriesController';
 import { ImportCategoriesController } from '../useCases/ImportCategories/ImportCategoriesController';
 
-export const categoriesRoutes = Router();
+export const categoriesRouter = Router();
 
 const upload = multer({
   dest: resolve(__dirname, '..', '..', '..', '..', 'tmp'),
@@ -18,14 +18,14 @@ const importCategoriesController = new ImportCategoriesController();
 const findAllCategoriesController = new FindAllCategoriesController();
 const deleteCategoryController = new DeleteCategoryController();
 
-categoriesRoutes.post('/', createCategoryController.handle);
+categoriesRouter.post('/', createCategoryController.handle);
 
-categoriesRoutes.post(
+categoriesRouter.post(
   '/import',
   upload.single('file'),
   importCategoriesController.handle,
 );
 
-categoriesRoutes.get('/', findAllCategoriesController.handle);
+categoriesRouter.get('/', findAllCategoriesController.handle);
 
-categoriesRoutes.delete('/:id', deleteCategoryController.handle);
+categoriesRouter.delete('/:id', deleteCategoryController.handle);
