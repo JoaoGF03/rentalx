@@ -17,7 +17,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Category"
+                "$ref": "#/components/reqBody/Category"
               }
             }
           },
@@ -52,7 +52,7 @@
           }
         }
       },
-      "get":{
+      "get": {
         "tags": [
           "Category"
         ],
@@ -75,6 +75,148 @@
           }
         }
       }
+    },
+    "/categories/{id}":{
+      "delete":{
+        "tags": [
+          "Category"
+        ],
+        "summary": "Delete a category",
+        "description": "Delete a category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Category ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Category not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/import": {
+      "post": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Import categories",
+        "description": "Import categories",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/specifications": {
+      "post": {
+        "tags": [
+          "Specification"
+        ],
+        "summary": "Create a new specification",
+        "description": "Create a new specification",
+        "operationId": "createSpecification",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/reqBody/Specification"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Specification"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Specification already exists"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Specification"
+        ],
+        "summary": "Get all specifications",
+        "description": "Get all specifications",
+        "operationId": "getSpecifications",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Specification"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -82,13 +224,82 @@
       "Category": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
+          },
           "name": {
             "type": "string",
-            "example": "Sedan"
+            "example": "Category"
           },
           "description": {
             "type": "string",
-            "example": "Description of the sedan"
+            "example": "Description of the Category"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00.000Z"
+          }
+        }
+      },
+      "Specification": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
+          },
+          "name": {
+            "type": "string",
+            "example": "Specification"
+          },
+          "description": {
+            "type": "string",
+            "example": "Description of the Specification"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00.000Z"
+          }
+        }
+      }
+    },
+    "reqBody": {
+      "Category": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Category"
+          },
+          "description": {
+            "type": "string",
+            "example": "Description of the Category"
+          }
+        }
+      },
+      "Specification": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Specification"
+          },
+          "description": {
+            "type": "string",
+            "example": "Description of the Specification"
           }
         }
       }

@@ -9,8 +9,8 @@ export class ImportCategoriesController {
 
     const importCategoriesUseCase = container.resolve(ImportCategoriesUseCase);
 
-    const metrics = await importCategoriesUseCase.execute(file);
+    await importCategoriesUseCase.execute(file);
 
-    return response.json({ metrics });
+    return response.send();
   }
 }
