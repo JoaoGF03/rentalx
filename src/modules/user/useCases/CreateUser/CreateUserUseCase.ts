@@ -1,4 +1,5 @@
 import { User } from '@prisma/client';
+import { hash } from 'bcrypt';
 import { inject, injectable } from 'tsyringe';
 
 import { AppError } from '@shared/errors/AppError';
@@ -23,11 +24,13 @@ export class CreateUserUseCase {
 
     if (userAlreadyExists) throw new AppError('User already exists');
 
+    const passwordHash = await hash(password, 8);
+
     const user = await this.usersRepository.create({
       driverLicense,
       email,
       name,
-      password,
+      password: passwordHash,
     });
 
     return user;
