@@ -76,8 +76,8 @@
         }
       }
     },
-    "/categories/{id}":{
-      "delete":{
+    "/categories/{id}": {
+      "delete": {
         "tags": [
           "Category"
         ],
@@ -217,6 +217,57 @@
           }
         }
       }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create a new user",
+        "description": "Create a new user",
+        "operationId": "createUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/reqBody/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Email in use": {
+                    "value": {
+                      "message": "User already exists with this email"
+                    }
+                  },
+                  "Username in use": {
+                    "value": {
+                      "message": "User already exists with this username"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -274,6 +325,49 @@
             "example": "2020-01-01T00:00:00.000Z"
           }
         }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
+          },
+          "name": {
+            "type": "string",
+            "example": "User"
+          },
+          "username": {
+            "type": "string",
+            "example": "username"
+          },
+          "email": {
+            "type": "string",
+            "example": "email@email.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          },
+          "driverLicense": {
+            "type": "string",
+            "example": "driverLicense"
+          },
+          "isAdmin": {
+            "type": "boolean",
+            "example": false
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00.000Z"
+          }
+        }
       }
     },
     "reqBody": {
@@ -300,6 +394,31 @@
           "description": {
             "type": "string",
             "example": "Description of the Specification"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "User"
+          },
+          "username": {
+            "type": "string",
+            "example": "username"
+          },
+          "email": {
+            "type": "string",
+            "example": "email@email.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          },
+          "driverLicense": {
+            "type": "string",
+            "example": "driverLicense"
           }
         }
       }
