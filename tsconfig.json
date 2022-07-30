@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "target": "ES6",
     "module": "commonjs",
     "rootDir": "./",
     "baseUrl": "./src",
@@ -14,7 +14,10 @@
       ],
       "@utils/*": [
         "utils/*"
-      ]
+      ],
+      "@config/*": [
+        "config/*"
+      ],
     },
     "esModuleInterop": true,
     "experimentalDecorators": true,

@@ -1,6 +1,6 @@
 import { Specification } from '@prisma/client';
 
-import { prisma } from '@shared/prisma';
+import { prisma } from '@shared/infra/prisma';
 
 import { ISpecificationsRepository } from '../ISpecificationsRepository';
 import { ICreateSpecificationDTO } from '../SpecificationsDTO';

@@ -4,7 +4,8 @@ import '@shared/container';
 import express, { Request, Response, NextFunction, json } from 'express';
 import swaggerUi from 'swagger-ui-express';
 
-import { AppError } from './errors/AppError';
+import { AppError } from '@shared/errors/AppError';
+
 import { routes } from './routes';
 import swaggerFile from './swagger.json';
 

@@ -1,6 +1,6 @@
 import { User } from '@prisma/client';
 
-import { prisma } from '@shared/prisma';
+import { prisma } from '@shared/infra/prisma';
 
 import { IUsersRepository } from '../IUsersRepository';
 import { ICreateUserDTO } from '../UsersDTO';

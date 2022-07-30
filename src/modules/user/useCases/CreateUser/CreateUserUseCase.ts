@@ -1,8 +1,8 @@
 import { User } from '@prisma/client';
-import { hash } from 'bcrypt';
 import { inject, injectable } from 'tsyringe';
 
 import { AppError } from '@shared/errors/AppError';
+import { IHashProvider } from '@shared/providers/HashProvider/IHashProvider';
 
 import { IUsersRepository } from '@modules/user/repositories/IUsersRepository';
 import { ICreateUserDTO } from '@modules/user/repositories/UsersDTO';
@@ -12,6 +12,8 @@ export class CreateUserUseCase {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+    @inject('HashProvider')
+    private hashProvider: IHashProvider,
   ) {}
 
   public async execute({
@@ -24,7 +26,7 @@ export class CreateUserUseCase {
 
     if (userAlreadyExists) throw new AppError('User already exists');
 
-    const passwordHash = await hash(password, 8);
+    const passwordHash = await this.hashProvider.generateHash(password);
 
     const user = await this.usersRepository.create({
       driverLicense,

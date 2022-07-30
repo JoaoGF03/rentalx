@@ -1,6 +1,6 @@
 import { Category } from '@prisma/client';
 
-import { prisma } from '@shared/prisma';
+import { prisma } from '@shared/infra/prisma';
 
 import { ICreateCategoryDTO } from '../CategoriesDTO';
 import { ICategoriesRepository } from '../ICategoriesRepository';
