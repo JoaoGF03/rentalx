@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+import { ensureAuthenticated } from '@shared/middlewares/ensureAuthenticated';
+
 import { CreateUserController } from '../useCases/CreateUser/CreateUserController';
 import { FindAllUsersController } from '../useCases/FindAllUsers/FindAllUsersController';
 
@@ -10,4 +12,4 @@ const findAllUsersController = new FindAllUsersController();
 
 usersRouter.post('/', createUserController.handle);
 
-usersRouter.get('/', findAllUsersController.handle);
+usersRouter.get('/', ensureAuthenticated, findAllUsersController.handle);

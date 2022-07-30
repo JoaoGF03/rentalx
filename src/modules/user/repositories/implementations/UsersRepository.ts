@@ -41,4 +41,14 @@ export class UsersRepository implements IUsersRepository {
 
     return users;
   }
+
+  public async findById(id: string): Promise<User> {
+    const user = await this.ormRepository.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return user;
+  }
 }
