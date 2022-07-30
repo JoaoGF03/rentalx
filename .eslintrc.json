@@ -65,7 +65,7 @@
         "newlinesBetween": "always",
         "groups": [
           "module",
-          "/^@utils\/config/",
+          "/^@config/",
           "/^@shared/",
           "/^@modules/",
           [

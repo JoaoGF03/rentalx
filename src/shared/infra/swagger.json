@@ -5,86 +5,12 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/users": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Create a new user",
-        "description": "Create a new user",
-        "operationId": "createUser",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/reqBody/User"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "User already exists"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security":[]
-      },
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Get all users",
-        "description": "Get all users",
-        "operationId": "getUsers",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/User"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/auth": {
       "post": {
         "tags": [
           "Authentication"
         ],
         "summary": "Login",
-        "description": "Login",
-        "operationId": "login",
         "requestBody": {
           "content": {
             "application/json": {
@@ -130,6 +56,103 @@
         "security": []
       }
     },
+    "/users": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/reqBody/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User already exists"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get all users",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/avatar": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update user avatar",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No content"
+          }
+        }
+      }
+    },
     "/categories": {
       "security": [
         {
@@ -141,8 +164,6 @@
           "Category"
         ],
         "summary": "Create a new category",
-        "description": "Create a new category",
-        "operationId": "createCategory",
         "requestBody": {
           "content": {
             "application/json": {
@@ -187,8 +208,6 @@
           "Category"
         ],
         "summary": "Get all categories",
-        "description": "Get all categories",
-        "operationId": "getCategories",
         "responses": {
           "200": {
             "description": "OK",
@@ -212,7 +231,6 @@
           "Category"
         ],
         "summary": "Delete a category",
-        "description": "Delete a category",
         "parameters": [
           {
             "name": "id",
@@ -253,7 +271,6 @@
           "Category"
         ],
         "summary": "Import categories",
-        "description": "Import categories",
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -283,8 +300,6 @@
           "Specification"
         ],
         "summary": "Create a new specification",
-        "description": "Create a new specification",
-        "operationId": "createSpecification",
         "requestBody": {
           "content": {
             "application/json": {
@@ -329,8 +344,6 @@
           "Specification"
         ],
         "summary": "Get all specifications",
-        "description": "Get all specifications",
-        "operationId": "getSpecifications",
         "responses": {
           "200": {
             "description": "OK",
@@ -427,6 +440,10 @@
           "driverLicense": {
             "type": "string",
             "example": "driverLicense"
+          },
+          "avatar":{
+            "type": "string",
+            "example": "avatar"
           },
           "isAdmin": {
             "type": "boolean",
