@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import 'express-async-errors';
 import '@shared/container';
+import { customCss } from '@utils/swaggerCss';
 import express, { Request, Response, NextFunction, json } from 'express';
 import swaggerUi from 'swagger-ui-express';
 
@@ -12,7 +13,14 @@ import swaggerFile from './swagger.json';
 export const app = express();
 
 app.use(json());
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use(
+  '/api-docs',
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerFile, {
+    customCss,
+    customSiteTitle: 'RenteX API',
+  }),
+);
 
 app.use(routes);
 
