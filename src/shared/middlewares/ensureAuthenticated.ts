@@ -1,3 +1,4 @@
+import { JWT_SECRET } from '@utils/constants';
 import { Request, Response, NextFunction } from 'express';
 import { JwtPayload, verify } from 'jsonwebtoken';
 
@@ -23,10 +24,7 @@ export async function ensureAuthenticated(
   const [, token] = authHeader.split(' ');
 
   try {
-    const { sub: userId } = verify(
-      token,
-      'aeef56f6fb5587ed320d0865835b25ba',
-    ) as IJwtPayLoad;
+    const { sub: userId } = verify(token, JWT_SECRET) as IJwtPayLoad;
 
     const usersRepository = new UsersRepository();
     const user = await usersRepository.findById(userId);

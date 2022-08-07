@@ -1,3 +1,4 @@
+import { JWT_SECRET } from '@utils/constants';
 import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 
@@ -39,7 +40,7 @@ export class AuthenticateUserUseCase {
       throw new AppError('Invalid login credentials', 401);
     }
 
-    const token = sign({}, 'aeef56f6fb5587ed320d0865835b25ba', {
+    const token = sign({}, JWT_SECRET, {
       subject: user.id,
       expiresIn: '1d',
     });
